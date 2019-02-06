@@ -17,7 +17,7 @@ def chores1():
         chores.remove(chore2)
         person = random.choice(people)
         people.remove(person)
-    return person + " needs to " + chore2
+        return person + " needs to " + chore2
 
 
 if __name__ == '__main__':
