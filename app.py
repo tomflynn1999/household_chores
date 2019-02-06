@@ -12,7 +12,7 @@ people = ["Tom", "Alex", "Carter", "Spencer", "Kyle","Maliek"]
 
 @app.route('/')
 def chores1():
-    while len(chores) < 0:
+    while len(chores) > 0:
         chore2 = random.choice(chores)
         chores.remove(chore2)
         person = random.choice(people)
