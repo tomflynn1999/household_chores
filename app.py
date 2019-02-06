@@ -29,8 +29,8 @@ def chores_():
     for p in people:
         chore2 = random.choice(chores)
         chores.remove(chore2)
-    return p
-
+        dates2 = random.choice(due_dates)
+        return p + " needs to " + chore2 + "by" + dates2
 
 if __name__ == '__main__':
     app.run()
