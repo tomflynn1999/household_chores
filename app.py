@@ -11,10 +11,13 @@ chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher","mop
 people = ["Tom", "Alex", "Carter", "Spencer", "Kyle","Maliek"]
 
 @app.route('/')
-def chores():
-    chore2 = random.choice(chores)
-    person = random.choice(people)
-    print(person + " needs to " + chore2)
+def chores1():
+    while (len(chores) < 0)
+          chore2 = random.choice(chores)
+          chores.remove(chores2)
+          person = random.choice(people)
+          people.remove(person)
+    return person + " needs to " + chore2
 
 
 if __name__ == '__main__':
