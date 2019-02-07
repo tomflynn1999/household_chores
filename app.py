@@ -10,6 +10,8 @@ chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher","mop
 
 people = ["Tom", "Alex", "Carter", "Spencer", "Kyle","Maliek"]
 
+due_dates = ["Feb 20","Feb 17","Feb 18","Feb 21", "Feb 16", "Feb 22"]
+
 @app.route('/')
 def chores1():
     while len(chores) > 0:
@@ -17,7 +19,9 @@ def chores1():
         chores.remove(chore2)
         person = random.choice(people)
         people.remove(person)
-        return person + " needs to " + chore2
+        dates = random.choice(due_dates)
+        due_dates.remove(dates)
+        return person + " needs to " + chore2 + " by " + dates
 
 
 if __name__ == '__main__':
