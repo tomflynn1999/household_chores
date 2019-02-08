@@ -24,5 +24,13 @@ def chores1():
         return person + " needs to " + chore2 + " by " + dates
 
 
+@app.route('/2')
+def chores_():
+    for p in people:
+        chore2 = random.choice(chores)
+        chores.remove(chore2)
+    return p
+
+
 if __name__ == '__main__':
     app.run()
