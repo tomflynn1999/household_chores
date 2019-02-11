@@ -2,6 +2,8 @@ from typing import List
 
 from flask import Flask
 import random
+import schedule
+import time
 
 app = Flask(__name__)
 
@@ -31,6 +33,11 @@ def chores_():
         chores.remove(chore2)
         dates2 = random.choice(due_dates)
         return p + " needs to " + chore2 + "by" + dates2
+
+@app.route('/3')
+def chores_assignment():
+
+    schedule.every().sunday.do(job)
 
 if __name__ == '__main__':
     app.run()
