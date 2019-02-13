@@ -1,9 +1,11 @@
 from typing import List
 
-from flask import Flask
+from flask import Flask, render_template
 import random
 import schedule
 import time
+import jinja2
+import template
 
 app = Flask(__name__)
 
@@ -14,7 +16,7 @@ people = ["Tom", "Alex", "Carter", "Spencer", "Kyle","Maliek"]
 
 due_dates = ["Feb 20","Feb 17","Feb 18","Feb 21", "Feb 16", "Feb 22"]
 
-@app.route('/')
+
 def chores1():
     while len(chores) > 0:
         chore2 = random.choice(chores)
@@ -36,8 +38,11 @@ def chores_():
 
 @app.route('/3')
 def chores_assignment():
+    schedule.every().sunday.do(chores_)
 
-    schedule.every().sunday.do(job)
+@app.route('/')
+def chores_template():
+    return render_template('chores.html')
 
 if __name__ == '__main__':
     app.run()
