@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Household chores</title>
+</head>
+<body>
+    <div>
+        {% for p in people %}
+            {{ p.chores }}
+        {% endfor %}
+    </div>
+</body>
+</html>
