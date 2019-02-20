@@ -1,18 +1,15 @@
-from typing import List
-
 from flask import Flask, render_template
 import random
 import schedule
 import time
-import jinja2
 import template
 
 app = Flask(__name__)
 
+people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
+
 chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher","mop the floors",
           "vaccuum the floor","sweep the floor"]
-
-people = ["Tom", "Alex", "Carter", "Spencer", "Kyle","Maliek"]
 
 due_dates = ["Feb 20","Feb 17","Feb 18","Feb 21", "Feb 16", "Feb 22"]
 
@@ -42,7 +39,10 @@ def chores_assignment():
 
 @app.route('/')
 def chores_template():
-    return render_template('chores.html')
+    people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
+    chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher", "mop the floors",
+              "vaccuum the floor", "sweep the floor"]
+    return render_template('chores.html', people=people, chores=chores)
 
 if __name__ == '__main__':
     app.run()

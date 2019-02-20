@@ -6,9 +6,11 @@
 </head>
 <body>
     <div>
-        {% for p in people %}
-            {{ p.chores }}
-        {% endfor %}
+        <ul>
+            {% for p in people %}
+                <li>{{ p }} needs to {{ chores|random() }}. </li>
+            {% endfor %}
+        </ul>
     </div>
 </body>
 </html>
