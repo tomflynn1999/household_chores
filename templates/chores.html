@@ -7,8 +7,8 @@
 <body>
     <div>
         <ul>
-            {% for p in people %}
-                <li>{{ p }} needs to {{ chores|random() }}. </li>
+            {% for x in chore_list %}
+                <li>{{ x[0] }} needs to {{ x[1] }}. </li>
             {% endfor %}
         </ul>
     </div>

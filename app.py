@@ -42,7 +42,18 @@ def chores_template():
     people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
     chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher", "mop the floors",
               "vaccuum the floor", "sweep the floor"]
-    return render_template('chores.html', people=people, chores=chores)
+
+    chore_list = []
+    for i in range(len(people)):
+        idx_person = random.randint(0, len(people)-1)
+        person = people[idx_person]
+        del people[idx_person]
+        idx_chore = random.randint(0, len(chores)-1)
+        chore = chores[idx_chore]
+        del chores[idx_chore]
+        chore_list.append([person, chore])
+
+    return render_template('chores.html', people=people, chores=chores, chore_list=chore_list)
 
 if __name__ == '__main__':
     app.run()
