@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 import random
 import schedule
+import calendar
 import time
-import template
 
 app = Flask(__name__)
 
@@ -11,7 +11,7 @@ people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
 chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher","mop the floors",
           "vaccuum the floor","sweep the floor"]
 
-due_dates = ["Feb 20","Feb 17","Feb 18","Feb 21", "Feb 16", "Feb 22"]
+due_dates = ["March 20","March 17","March 18","March 21", "March 16", "March 22"]
 
 
 def chores1():
@@ -42,7 +42,7 @@ def chores_template():
     people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
     chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher", "mop the floors",
               "vaccuum the floor", "sweep the floor"]
-
+    due_dates = ["March 20", "March 17", "March 18", "March 21", "March 16", "March 22"]
     chore_list = []
     for i in range(len(people)):
         idx_person = random.randint(0, len(people)-1)
@@ -51,9 +51,11 @@ def chores_template():
         idx_chore = random.randint(0, len(chores)-1)
         chore = chores[idx_chore]
         del chores[idx_chore]
-        chore_list.append([person, chore])
+        idx_due_dates = random.randint(0, len(due_dates)-1)
+        due_date = due_dates[idx_due_dates]
+        chore_list.append([person, chore, due_date])
 
-    return render_template('chores.html', people=people, chores=chores, chore_list=chore_list)
+    return render_template('chores.html', people=people, chores=chores, due_dates=due_dates, chore_list=chore_list)
 
 if __name__ == '__main__':
     app.run()
