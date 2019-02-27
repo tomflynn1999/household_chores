@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import random
 import schedule
+import sqlite3 as sql
 import calendar
 import time
 
@@ -56,6 +57,48 @@ def chores_template():
         chore_list.append([person, chore, due_date])
 
     return render_template('chores.html', people=people, chores=chores, due_dates=due_dates, chore_list=chore_list)
+
+
+@app.route('/enternew')
+def new_student():
+   return render_template('db_builder.html')
+
+
+@app.route('/addrec', methods=['POST', 'GET'])
+def addrec():
+    if request.method == 'POST':
+        try:
+            nm = request.form['nm']
+            addr = request.form['add']
+            city = request.form['city']
+            pin = request.form['pin']
+
+            with sql.connect("database.db") as con:
+                cur = con.cursor()
+
+                cur.execute("INSERT INTO students (name,addr,city,pin) VALUES(?, ?, ?, ?)",(nm,addr,city,pin) )
+
+                con.commit()
+                msg = "Record successfully added"
+        except:
+            con.rollback()
+            msg = "error in insert operation"
+
+        finally:
+            return render_template("result.html", msg=msg)
+            con.close()
+
+
+@app.route('/list')
+def list():
+    con = sql.connect("database.db")
+    con.row_factory = sql.Row
+
+    cur = con.cursor()
+    cur.execute("select * from students")
+
+    rows = cur.fetchall();
+    return render_template("list.html", rows=rows)
 
 if __name__ == '__main__':
     app.run()
