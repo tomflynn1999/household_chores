@@ -69,14 +69,14 @@ def addrec():
     if request.method == 'POST':
         try:
             nm = request.form['nm']
-            addr = request.form['add']
-            city = request.form['city']
-            pin = request.form['pin']
+            chore = request.form['chore']
+            date = request.form['date']
+            completed = request.form['completed']
 
             with sql.connect("database.db") as con:
                 cur = con.cursor()
 
-                cur.execute("INSERT INTO students (name,addr,city,pin) VALUES(?, ?, ?, ?)",(nm,addr,city,pin) )
+                cur.execute("INSERT INTO db_builder (name,chore,date,completed) VALUES(?, ?, ?, ?)",(nm,chore,date,completed) )
 
                 con.commit()
                 msg = "Record successfully added"
@@ -95,7 +95,7 @@ def list():
     con.row_factory = sql.Row
 
     cur = con.cursor()
-    cur.execute("select * from students")
+    cur.execute("select * from db_builder")
 
     rows = cur.fetchall();
     return render_template("list.html", rows=rows)
