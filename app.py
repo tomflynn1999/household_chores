@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request
 import random
-import schedule
 import sqlite3
-import calendar
-import time
 
 app = Flask(__name__)
 
