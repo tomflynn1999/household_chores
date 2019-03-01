@@ -25,8 +25,14 @@ def create_table():
 
 create_table()
 
-
 @app.route('/')
+def db_template():
+    c.execute("SELECT * FROM dataset")
+    data = c.fetchall()
+    return render_template('db_chores.html', data = data)
+
+
+@app.route('/1')
 def chores_template():
     people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
     chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher", "mop the floors",
@@ -45,7 +51,6 @@ def chores_template():
         chore_list.append([person, chore, due_date])
 
     return render_template('chores.html', people=people, chores=chores, due_dates=due_dates, chore_list=chore_list)
-
 
 
 if __name__ == '__main__':
