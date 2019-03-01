@@ -9,8 +9,8 @@ app = Flask(__name__)
 
 people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
 
-chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher","mop the floors",
-          "vaccuum the floor","sweep the floor"]
+chores = ["clean the bathroom", "clean the movie room", "empty the dishwasher", "wipe the counters",
+              "vaccuum the floor", "sweep the floor"]
 
 due_dates = ["March 20","March 17","March 18","March 21", "March 16", "March 22"]
 
@@ -35,7 +35,7 @@ def db_template():
 @app.route('/1')
 def chores_template():
     people = ["Tom", "Alex", "Carter", "Spencer", "Kyle", "Maliek"]
-    chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher", "mop the floors",
+    chores = ["clean the bathroom", "clean the movie room", "empty the dishwasher", "wipe the counters",
               "vaccuum the floor", "sweep the floor"]
     due_dates = ["March 20", "March 17", "March 18", "March 21", "March 16", "March 22"]
     chore_list = []
