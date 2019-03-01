@@ -15,11 +15,9 @@ chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher","mop
 due_dates = ["March 20","March 17","March 18","March 21", "March 16", "March 22"]
 
 
-conn = sqlite3.connect('chores.db')
-c = conn.cursor()
-
-
 def create_table():
+    conn = sqlite3.connect('chores.db')
+    c = conn.cursor()
     c.execute("Create Table IF NOT EXISTS stuffToPlot(name TEXT, chore TEXT, date TEXT, completed TEXT)")
 
 
@@ -27,7 +25,9 @@ create_table()
 
 @app.route('/')
 def db_template():
-    c.execute("SELECT * FROM dataset")
+    conn = sqlite3.connect('chores.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM stuffToPlot")
     data = c.fetchall()
     return render_template('db_chores.html', data = data)
 
