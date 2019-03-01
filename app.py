@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 import random
 import schedule
-import sqlite3 as sql
+import sqlite3
 import calendar
 import time
 
@@ -15,28 +15,21 @@ chores = ["clean the bathroom", "clean the kitchen", "empty the dishwasher","mop
 due_dates = ["March 20","March 17","March 18","March 21", "March 16", "March 22"]
 
 
-def chores1():
-    while len(chores) > 0:
-        chore2 = random.choice(chores)
-        chores.remove(chore2)
-        person = random.choice(people)
-        people.remove(person)
-        dates = random.choice(due_dates)
-        due_dates.remove(dates)
-        return person + " needs to " + chore2 + " by " + dates
+conn = sqlite3.connect('chores.db')
+c = conn.cursor()
 
+def create_table():
+    c.execute("Create Table IF NOT EXISTS stuffToPlot(name TEXT, chore TEXT, date TEXT, completed TEXT)")
 
-@app.route('/2')
-def chores_():
-    for p in people:
-        chore2 = random.choice(chores)
-        chores.remove(chore2)
-        dates2 = random.choice(due_dates)
-        return p + " needs to " + chore2 + "by" + dates2
+def data_entry():
+    c.excecute('INSERT INTO stuffToPlot VALUES("Tom", "sweep the floor", "March 22nd", "False")')
+    conn.commit()
+    c.close()
+    conn.close()
 
-@app.route('/3')
-def chores_assignment():
-    schedule.every().sunday.do(chores_)
+create_table()
+data_entry()
+
 
 @app.route('/')
 def chores_template():
@@ -59,46 +52,6 @@ def chores_template():
     return render_template('chores.html', people=people, chores=chores, due_dates=due_dates, chore_list=chore_list)
 
 
-@app.route('/enternew')
-def new_student():
-   return render_template('db_builder.html')
-
-
-@app.route('/addrec', methods=['POST', 'GET'])
-def addrec():
-    if request.method == 'POST':
-        try:
-            nm = request.form['nm']
-            chore = request.form['chore']
-            date = request.form['date']
-            completed = request.form['completed']
-
-            with sql.connect("database.db") as con:
-                cur = con.cursor()
-
-                cur.execute("INSERT INTO db_builder (name,chore,date,completed) VALUES(?, ?, ?, ?)",(nm,chore,date,completed) )
-
-                con.commit()
-                msg = "Record successfully added"
-        except:
-            con.rollback()
-            msg = "error in insert operation"
-
-        finally:
-            return render_template("result.html", msg=msg)
-            con.close()
-
-
-@app.route('/list')
-def list():
-    con = sql.connect("database.db")
-    con.row_factory = sql.Row
-
-    cur = con.cursor()
-    cur.execute("select * from db_builder")
-
-    rows = cur.fetchall();
-    return render_template("list.html", rows=rows)
 
 if __name__ == '__main__':
     app.run()
