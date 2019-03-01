@@ -18,17 +18,12 @@ due_dates = ["March 20","March 17","March 18","March 21", "March 16", "March 22"
 conn = sqlite3.connect('chores.db')
 c = conn.cursor()
 
+
 def create_table():
     c.execute("Create Table IF NOT EXISTS stuffToPlot(name TEXT, chore TEXT, date TEXT, completed TEXT)")
 
-def data_entry():
-    c.excecute('INSERT INTO stuffToPlot VALUES("Tom", "sweep the floor", "March 22nd", "False")')
-    conn.commit()
-    c.close()
-    conn.close()
 
 create_table()
-data_entry()
 
 
 @app.route('/')
