@@ -8,12 +8,14 @@
 </head>
 <body>
 <div>
+    <h1>Kalispell House Chores</h1>
+</div>
+<div>
     {% for item in data %}
     <ul>
         <li>{{ item[0] }}</li>
         <li>{{ item[1] }}</li>
         <li>{{ item[2] }}</li>
-        <li>{{ item[3] }}</li>
     </ul>
     {% endfor %}
 </div>
