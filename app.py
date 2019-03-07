@@ -15,10 +15,11 @@ due_dates = ["March 20","March 17","March 18","March 21", "March 16", "March 22"
 def create_table():
     conn = sqlite3.connect('chores.db')
     c = conn.cursor()
-    c.execute("Create Table IF NOT EXISTS stuffToPlot(name TEXT, chore TEXT, date TEXT, completed TEXT)")
+    c.execute("Create Table IF NOT EXISTS stuffToPlot(name TEXT, chore TEXT, date DATE , completed )")
 
 
 create_table()
+
 
 @app.route('/')
 def db_template():
